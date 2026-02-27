@@ -26,12 +26,18 @@
             box-sizing: border-box;
         }
 
+        html {
+            overflow-x: hidden;
+            max-width: 100vw;
+        }
+
         body {
             font-family: 'Montserrat', sans-serif;
             color: var(--text-color);
             line-height: 1.6;
             background-color: var(--secondary-color);
             overflow-x: hidden;
+            max-width: 100vw;
         }
 
         #petal-canvas {
@@ -1332,10 +1338,208 @@
         img {
             cursor: pointer;
         }
+
+        /* ===== INTRO LOADING SCREEN ===== */
+        #intro-screen {
+            position: fixed;
+            inset: 0;
+            z-index: 99999;
+            background: linear-gradient(160deg, #3a0000 0%, #6b0f0f 40%, #8b1a1a 70%, #2c0000 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 30px;
+            transition: opacity 0.9s ease, visibility 0.9s ease;
+            overflow: hidden;
+        }
+
+        #intro-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .intro-petals {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .intro-petal {
+            position: absolute;
+            top: -20px;
+            font-size: 1.2rem;
+            animation: introPetalFall linear infinite;
+            opacity: 0.6;
+        }
+
+        @keyframes introPetalFall {
+            0% {
+                transform: translateY(-20px) rotate(0deg);
+                opacity: 0.7;
+            }
+
+            100% {
+                transform: translateY(110vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .intro-double-happiness {
+            font-size: 4rem;
+            color: #d4af37;
+            margin-bottom: 12px;
+            filter: drop-shadow(0 0 12px rgba(212, 175, 55, 0.6));
+            animation: glowPulse 2s ease infinite alternate;
+        }
+
+        @keyframes glowPulse {
+            from {
+                filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.4));
+            }
+
+            to {
+                filter: drop-shadow(0 0 24px rgba(212, 175, 55, 0.9));
+            }
+        }
+
+        .intro-names {
+            font-family: 'Great Vibes', cursive;
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            color: #d4af37;
+            margin-bottom: 8px;
+            text-shadow: 0 2px 20px rgba(212, 175, 55, 0.5);
+            line-height: 1.2;
+        }
+
+        .intro-heart-divider {
+            font-size: 1.5rem;
+            color: #f48fb1;
+            margin: 4px 0 16px;
+            animation: heartBeat 0.8s ease infinite alternate;
+        }
+
+        .intro-message {
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(0.88rem, 2.5vw, 1.05rem);
+            color: rgba(255, 255, 255, 0.88);
+            line-height: 1.8;
+            max-width: 400px;
+            margin-bottom: 36px;
+            font-weight: 300;
+        }
+
+        .intro-message strong {
+            color: #f5d98e;
+            font-weight: 600;
+        }
+
+        .intro-countdown-wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .intro-countdown-label {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.55);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .intro-countdown-ring {
+            position: relative;
+            width: 80px;
+            height: 80px;
+        }
+
+        .intro-countdown-ring svg {
+            transform: rotate(-90deg);
+            width: 80px;
+            height: 80px;
+        }
+
+        .intro-ring-bg {
+            fill: none;
+            stroke: rgba(255, 255, 255, 0.1);
+            stroke-width: 5;
+        }
+
+        .intro-ring-progress {
+            fill: none;
+            stroke: #d4af37;
+            stroke-width: 5;
+            stroke-linecap: round;
+            stroke-dasharray: 220;
+            stroke-dashoffset: 0;
+            transition: stroke-dashoffset 1s linear;
+        }
+
+        .intro-countdown-num {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #d4af37;
+        }
+
+        .intro-skip-btn {
+            margin-top: 24px;
+            background: transparent;
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            color: rgba(255, 255, 255, 0.6);
+            padding: 8px 22px;
+            border-radius: 25px;
+            font-size: 0.78rem;
+            cursor: pointer;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+        }
+
+        .intro-skip-btn:hover {
+            border-color: #d4af37;
+            color: #d4af37;
+        }
     </style>
 </head>
 
 <body>
+
+    <!-- ===== INTRO LOADING SCREEN ===== -->
+    <div id="intro-screen">
+        <div class="intro-petals" id="introPetals"></div>
+
+        <div class="intro-double-happiness">嗜</div>
+
+        <div class="intro-names">
+            Trường An &amp; Thanh Huyền
+        </div>
+        <div class="intro-heart-divider">❤️</div>
+
+        <p class="intro-message">
+            Cảm ơn bạn đã đến và khám phá hành trình yêu thương của chúng mình trong ngày cưới. <br>
+            Mời bạn cùng theo đoàn rước dâu, đi dọc theo những kỷ niệm ngọt ngào và đầy ắp yêu thương 💕
+        </p>
+
+        <div class="intro-countdown-wrap">
+            <div class="intro-countdown-label">Tự động vào trang sau</div>
+            <div class="intro-countdown-ring">
+                <svg viewBox="0 0 80 80">
+                    <circle class="intro-ring-bg" cx="40" cy="40" r="35" />
+                    <circle class="intro-ring-progress" id="introRingProgress" cx="40" cy="40" r="35" />
+                </svg>
+                <div class="intro-countdown-num" id="introCountNum">10</div>
+            </div>
+            <button class="intro-skip-btn" onclick="skipIntro()">Bỏ qua &rarr;</button>
+        </div>
+    </div>
 
     <nav>
         <ul>
@@ -1735,6 +1939,53 @@
     </div>
 
     <script>
+        // ===== INTRO SCREEN =====
+        (function () {
+            const DURATION = 10; // seconds
+            const circumference = 2 * Math.PI * 35; // ~220
+            let remaining = DURATION;
+            const numEl = document.getElementById('introCountNum');
+            const ringEl = document.getElementById('introRingProgress');
+            ringEl.style.strokeDasharray = circumference;
+            ringEl.style.strokeDashoffset = 0;
+
+            // Falling petals
+            const petalContainer = document.getElementById('introPetals');
+            const petalEmojis = ['🌸', '🌹', '❤️', '💕', '🌷', '*'];
+            for (let i = 0; i < 18; i++) {
+                const p = document.createElement('span');
+                p.className = 'intro-petal';
+                p.textContent = petalEmojis[Math.floor(Math.random() * petalEmojis.length)];
+                p.style.left = (Math.random() * 100) + '%';
+                p.style.animationDuration = (4 + Math.random() * 6) + 's';
+                p.style.animationDelay = (Math.random() * 5) + 's';
+                p.style.fontSize = (0.8 + Math.random() * 1) + 'rem';
+                petalContainer.appendChild(p);
+            }
+
+            const tick = setInterval(() => {
+                remaining--;
+                numEl.textContent = remaining;
+                const offset = circumference * (1 - remaining / DURATION);
+                ringEl.style.strokeDashoffset = offset;
+                if (remaining <= 0) {
+                    clearInterval(tick);
+                    skipIntro();
+                }
+            }, 1000);
+
+            window._introTimer = tick;
+        })();
+
+        function skipIntro() {
+            clearInterval(window._introTimer);
+            document.getElementById('intro-screen').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Block scroll while intro is showing
+        document.body.style.overflow = 'hidden';
+
         // AOS Initialization
         AOS.init({
             duration: 1000,
