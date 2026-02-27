@@ -50,6 +50,52 @@
             z-index: 9999;
         }
 
+        /* Music Toggle Button */
+        #music-toggle {
+            position: fixed;
+            bottom: 28px;
+            right: 28px;
+            z-index: 10000;
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            background: linear-gradient(135deg, #d4af37, #b8962d);
+            color: #fff;
+            font-size: 1.2rem;
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            outline: none;
+        }
+
+        #music-toggle:hover {
+            transform: scale(1.12);
+            box-shadow: 0 10px 28px rgba(212, 175, 55, 0.65);
+        }
+
+        #music-toggle.playing i {
+            animation: spin-slow 3s linear infinite;
+        }
+
+        @keyframes spin-slow {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        #music-toggle.muted {
+            background: linear-gradient(135deg, #aaa, #888);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+
         h1,
         h2,
         h3,
@@ -1538,6 +1584,16 @@
 
 <body>
 
+    <!-- ===== BACKGROUND MUSIC ===== -->
+    <audio id="bg-music" loop preload="auto">
+        <source src="Lễ Đường.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Floating Music Toggle Button -->
+    <button id="music-toggle" title="Bật/Tắt nhạc" aria-label="Toggle music">
+        <i class="fas fa-music"></i>
+    </button>
+
     <!-- ===== INTRO LOADING SCREEN ===== -->
     <div id="intro-screen">
         <div class="intro-petals" id="introPetals"></div>
@@ -1669,7 +1725,7 @@
                     </div>
                     <div class="family-info-row">
                         <div class="family-info-label">Địa điểm tổ chức</div>
-                        <div class="family-info-value">Tại tại tư gia nhà trai, Thôn 11, xã Đắk Mar, tỉnh Quảng Ngãi
+                        <div class="family-info-value">Tại tại tư gia nam, Thôn 11, xã Đắk Mar, tỉnh Quảng Ngãi
                         </div>
                         <a class="family-map-btn"
                             href="https://www.google.com/maps?q=14.5808974,107.9202632&entry=gps&lucs=,94231188,47071704,94218641,94282134,94286869&g_ep=CAISEjI1LjI1LjMuNzcyMTMyNjA2MBgAIIgnKi0sOTQyMzExODgsNDcwNzE3MDQsOTQyMTg2NDEsOTQyODIxMzQsOTQyODY4NjlCAlZO&skid=63bd3310-401f-4e24-979f-14f33c3a3d44&g_st=ipc"
@@ -2340,6 +2396,55 @@
                     btn.disabled = false;
                 });
         }
+    </script>
+
+    <!-- ===== BACKGROUND MUSIC CONTROLLER ===== -->
+    <script>
+        (function () {
+            const audio = document.getElementById('bg-music');
+            const btn = document.getElementById('music-toggle');
+            let playing = false;
+
+            function startMusic() {
+                audio.volume = 0.5;
+                audio.play().then(() => {
+                    playing = true;
+                    btn.classList.add('playing');
+                    btn.classList.remove('muted');
+                }).catch(() => { });
+            }
+
+            // Autoplay on first user interaction (browser policy)
+            function handleFirstInteraction() {
+                if (!playing) startMusic();
+                document.removeEventListener('click', handleFirstInteraction);
+                document.removeEventListener('touchstart', handleFirstInteraction);
+                document.removeEventListener('keydown', handleFirstInteraction);
+            }
+
+            document.addEventListener('click', handleFirstInteraction);
+            document.addEventListener('touchstart', handleFirstInteraction);
+            document.addEventListener('keydown', handleFirstInteraction);
+
+            // Toggle button
+            btn.addEventListener('click', function (e) {
+                e.stopPropagation(); // Don't trigger first-interaction twice
+                if (playing) {
+                    audio.pause();
+                    playing = false;
+                    btn.classList.remove('playing');
+                    btn.classList.add('muted');
+                    btn.querySelector('i').className = 'fas fa-volume-mute';
+                } else {
+                    audio.play().then(() => {
+                        playing = true;
+                        btn.classList.add('playing');
+                        btn.classList.remove('muted');
+                        btn.querySelector('i').className = 'fas fa-music';
+                    }).catch(() => { });
+                }
+            });
+        })();
     </script>
 </body>
 
