@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thái Trường An & Phạm Thu Huyền - Wedding Invitation</title>
+    <title>Thái Trường An & Phạm Thanh Huyền - Wedding Invitation</title>
     <link
         href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap"
         rel="stylesheet">
@@ -511,29 +511,304 @@
         .bank-info {
             padding: 100px 0;
             text-align: center;
+            background: linear-gradient(135deg, #fdfaf6 0%, #fff8f0 100%);
         }
 
         .bank-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 40px;
+            gap: 30px;
             margin-top: 40px;
         }
 
         .bank-card {
             background: var(--white);
-            padding: 30px;
-            border-radius: 15px;
+            padding: 35px 25px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(212, 175, 55, 0.12);
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bank-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #8b1a1a, #c0392b, #d4af37);
+            border-radius: 20px 20px 0 0;
+        }
+
+        .bank-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 50px rgba(212, 175, 55, 0.25);
+        }
+
+        .bank-card-icon {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, #8b1a1a, #c0392b);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+            font-size: 1.6rem;
+            color: #d4af37;
+            box-shadow: 0 6px 20px rgba(139, 26, 26, 0.3);
+        }
+
+        .bank-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #4a4a4a;
+            margin-bottom: 6px;
+        }
+
+        .bank-card .bank-name-tag {
+            display: inline-block;
+            background: linear-gradient(135deg, #8b1a1a, #c0392b);
+            color: white;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            padding: 4px 12px;
+            border-radius: 20px;
+            margin-bottom: 12px;
+        }
+
+        .bank-card .bank-stk {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #8b1a1a;
+            letter-spacing: 1px;
+        }
+
+        .bank-card .bank-holder {
+            font-size: 0.9rem;
+            color: #888;
+            margin-top: 4px;
+        }
+
+        .bank-card .qr-preview {
+            width: 90px;
+            height: 90px;
+            margin: 16px auto 0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .bank-card .qr-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            cursor: pointer;
+        }
+
+        .bank-card .tap-hint {
+            font-size: 0.72rem;
+            color: #bbb;
+            margin-top: 12px;
+            letter-spacing: 0.5px;
+        }
+
+        /* === HOP MUNG CUOI MODAL === */
+        .hop-modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.65);
+            z-index: 20000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            backdrop-filter: blur(4px);
+        }
+
+        .hop-modal-overlay.active {
+            display: flex;
+        }
+
+        .hop-modal {
+            background: #fdf6ee;
+            border-radius: 24px;
+            width: 100%;
+            max-width: 360px;
+            text-align: center;
+            overflow: hidden;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.3);
+            animation: modalPop 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+        }
+
+        @keyframes modalPop {
+            from {
+                transform: scale(0.7);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .hop-modal-header {
+            background: linear-gradient(135deg, #6b0f0f, #8b1a1a, #a52020);
+            padding: 22px 20px 18px;
+            position: relative;
+        }
+
+        .hop-modal-header .double-happiness {
+            width: 52px;
+            height: 52px;
+            background: rgba(212, 175, 55, 0.2);
+            border: 2px solid #d4af37;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 10px;
+            font-size: 1.6rem;
+            color: #d4af37;
+        }
+
+        .hop-modal-header h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            color: #d4af37;
+            margin: 0;
+        }
+
+        .hop-modal-close {
+            position: absolute;
+            top: 12px;
+            right: 16px;
+            background: rgba(255, 255, 255, 0.15);
+            border: none;
+            color: #d4af37;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            font-size: 1.1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+        }
+
+        .hop-modal-close:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .hop-modal-body {
+            padding: 24px 28px 28px;
+        }
+
+        .hop-modal-person {
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
+            font-weight: 700;
+            color: #5a3a1a;
+            margin-bottom: 16px;
+        }
+
+        .hop-modal-qr {
+            width: 180px;
+            height: 180px;
+            margin: 0 auto 20px;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+            background: white;
+            padding: 6px;
+        }
+
+        .hop-modal-qr img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            cursor: default;
+        }
+
+        .hop-modal-bank-name {
+            font-size: 0.85rem;
+            color: #888;
+            margin-bottom: 4px;
+        }
+
+        .hop-modal-stk {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #8b1a1a;
+            letter-spacing: 1.5px;
+            margin-bottom: 4px;
+        }
+
+        .hop-modal-holder {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #4a4a4a;
+            margin-bottom: 16px;
+        }
+
+        .hop-modal-copy-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #8b1a1a, #c0392b);
+            color: white;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 25px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-bottom: 20px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 15px rgba(139, 26, 26, 0.35);
+        }
+
+        .hop-modal-copy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(139, 26, 26, 0.45);
+        }
+
+        .hop-modal-thankyou {
+            font-size: 0.78rem;
+            color: #aaa;
+            font-style: italic;
+            line-height: 1.6;
+            padding: 14px 0 0;
+            border-top: 1px solid #f0e8d8;
         }
 
         .qr-code {
-            width: 150px;
-            height: 150px;
-            background: #eee;
+            width: 180px;
+            height: 180px;
             margin: 20px auto;
             display: flex;
             align-items: center;
             justify-content: center;
+        }
+
+        .qr-code img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            cursor: default;
         }
 
         /* Family Info Section */
@@ -1096,6 +1371,31 @@
         </div>
     </section>
 
+    <section class="events" id="events">
+        <div class="container">
+            <h2 class="section-title">Thời Gian &amp; Địa Điểm</h2>
+            <div class="event-grid">
+                <div class="event-card">
+                    <img src="images/DSC06042.jpg" class="event-img">
+                    <h3 class="font-romantic" style="font-size: 2rem;">Lễ Ăn Hỏi</h3>
+                    <p>08:00 - 21/12/2025</p>
+                    <p>Số nhà 2, ngõ 302 đường Chi Lăng, xã Phù Ninh, tỉnh Phú Thọ</p>
+                    <a href="#" style="color: var(--primary-color); text-decoration: none; font-size: 0.8rem;">Xem vị
+                        trí</a>
+                </div>
+                <div class="event-card">
+                    <img src="images/DSC06147.jpg" class="event-img">
+                    <h3 class="font-romantic" style="font-size: 2rem;">Tiệc Cưới</h3>
+                    <p>10:30 - 09/03/2026</p>
+                    <p>Nhà hàng Quang Nghĩa, số 489 đường Chi Lăng, xã Phù Ninh, tỉnh Phú Thọ</p>
+                    <a href="https://www.google.com/maps?q=Nh%C3%A0+H%C3%A0ng+Quang+Ngh%C4%A9a,+QL2,+TT.+Phong+Ch%C3%A2u,+Ph%C3%B9+Ninh,+Ph%C3%BA+Th%E1%BB%8D&ftid=0x3134915f9a952e59:0xdc8ea5cefda0f4cc&entry=gps"
+                        target="_blank"
+                        style="color: var(--primary-color); text-decoration: none; font-size: 0.8rem;">Xem vị trí</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <div class="banner-large" data-aos="zoom-out">
         <div class="heart-overlay">
             <i class="fas fa-play" style="color: white; font-size: 3rem;"></i>
@@ -1228,55 +1528,71 @@
     <section class="bank-info">
         <div class="container">
             <h2 class="section-title">Gửi Quà Tặng</h2>
+            <p style="color:#888; font-size:0.9rem; margin-top:-20px; margin-bottom:10px;">Bấm vào để xem QR và thông
+                tin chuyển khoản</p>
             <div class="bank-grid">
-                <div class="bank-card">
-                    <h3>Chú rể</h3>
-                    <p>Thái Trường An</p>
-                    <p>STK: 123456789</p>
-                    <p>Techcombank</p>
-                    <div class="qr-code">QR Code</div>
+                <!-- Chú rể -->
+                <div class="bank-card" onclick="openHopModal('groom')">
+                    <div class="bank-card-icon">♥</div>
+                    <h3>Thái Trường An</h3>
+                    <span class="bank-name-tag">MB Bank</span>
+                    <div class="bank-stk">6868 1234 89999</div>
+                    <div class="bank-holder">Chú rể</div>
+                    <div class="qr-preview">
+                        <img src="images/QR-chu-re.png" alt="QR Chú rể" class="no-lightbox">
+                    </div>
+                    <p class="tap-hint">&#128247; Bấm để xem QR của chú rể</p>
                 </div>
-                <div class="bank-card">
-                    <h3>Cô dâu</h3>
-                    <p>Phạm Thu Huyền</p>
-                    <p>STK: 987654321</p>
-                    <p>Vietcombank</p>
-                    <div class="qr-code">QR Code</div>
+                <!-- Cô dâu -->
+                <div class="bank-card" onclick="openHopModal('bride')">
+                    <div class="bank-card-icon" style="background: linear-gradient(135deg, #b5477a, #e84393);">♥</div>
+                    <h3>Phạm Thanh Huyền</h3>
+                    <span class="bank-name-tag"
+                        style="background: linear-gradient(135deg, #b5477a, #e84393);">Vietcombank</span>
+                    <div class="bank-stk">987 654 321</div>
+                    <div class="bank-holder">Cô dâu</div>
+                    <div class="qr-preview">
+                        <img src="images/QR-co-dau.png" alt="QR Cô dâu" class="no-lightbox">
+                    </div>
+                    <p class="tap-hint">&#128247; Bấm để xem QR của cô dâu</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="events" id="events">
-        <div class="container">
-            <h2 class="section-title">Thời Gian & Địa Điểm</h2>
-            <div class="event-grid">
-                <div class="event-card">
-                    <img src="images/DSC06042.jpg" class="event-img">
-                    <h3 class="font-romantic" style="font-size: 2rem;">Lễ Ăn Hỏi</h3>
-                    <p>09:00 - 20/05/2026</p>
-                    <p>Nhà gái - 461 Nguyễn Khang, Cầu Giấy, Hà Nội</p>
-                    <a href="#" style="color: var(--primary-color); text-decoration: none; font-size: 0.8rem;">Xem vị
-                        trí</a>
+    <!-- HỘP MỮNG CƯỚI MODAL -->
+    <div class="hop-modal-overlay" id="hopModal" onclick="closeHopModal(event)">
+        <div class="hop-modal">
+            <div class="hop-modal-header">
+                <div class="double-happiness">嗜</div>
+                <h2>HỘP MỮNG CƯỚI</h2>
+                <button class="hop-modal-close" onclick="closeHopModalBtn()">&times;</button>
+            </div>
+            <div class="hop-modal-body">
+                <div class="hop-modal-person" id="modalPerson"></div>
+                <div class="hop-modal-qr">
+                    <img id="modalQR" src="" alt="QR Code" class="no-lightbox">
                 </div>
-                <div class="event-card">
-                    <img src="images/DSC06147.jpg" class="event-img">
-                    <h3 class="font-romantic" style="font-size: 2rem;">Tiệc Cưới</h3>
-                    <p>18:30 - 23/05/2026</p>
-                    <p>Trung tâm tiệc cưới Trống Đồng Palace</p>
-                    <a href="#" style="color: var(--primary-color); text-decoration: none; font-size: 0.8rem;">Xem vị
-                        trí</a>
+                <div class="hop-modal-bank-name" id="modalBank"></div>
+                <div class="hop-modal-stk" id="modalSTK"></div>
+                <div class="hop-modal-holder" id="modalHolder"></div>
+                <button class="hop-modal-copy-btn" onclick="copySTK()">
+                    <i class="fas fa-copy"></i> Sao chép số tài khoản
+                </button>
+                <div class="hop-modal-thankyou">
+                    Cảm ơn bạn đã đồng hành cùng chúng mình trong ngày trọng đại!
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+
 
     <canvas id="petal-canvas"></canvas>
 
     <footer>
         <h2 class="font-romantic" style="font-size: 2.5rem;">Cảm ơn bạn!</h2>
         <p>Hân hạnh được đón tiếp bạn trong ngày vui của chúng mình.</p>
-        <p style="margin-top: 20px; font-size: 0.7rem; color: #aaa;">Copyright &copy; 2026 Trường An & Thu Huyền</p>
+        <p style="margin-top: 20px; font-size: 0.7rem; color: #aaa;">Copyright &copy; 2026 Trường An & Thanh Huyền</p>
     </footer>
 
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
@@ -1385,7 +1701,7 @@
         });
 
         // Countdown Timer
-        const weddingDate = new Date("May 23, 2026 18:30:00").getTime();
+        const weddingDate = new Date("March 9, 2026 10:30:00").getTime();
 
         const timer = setInterval(function () {
             const now = new Date().getTime();
@@ -1441,6 +1757,63 @@
 
         lightboxClose.onclick = closeLightbox;
         lightbox.onclick = closeLightbox;
+
+        // === HOP MUNG CUOI MODAL ===
+        const hopData = {
+            groom: {
+                person: 'Chú Rể • Trường An',
+                qr: 'images/QR-chu-re.png',
+                bank: 'MB Bank',
+                stk: '6868123489999',
+                stkDisplay: '6868 1234 89999',
+                holder: 'THAI TRUONG AN'
+            },
+            bride: {
+                person: 'Cô Dâu • Thanh Huyền',
+                qr: 'images/QR-co-dau.png',
+                bank: 'Vietcombank',
+                stk: '987654321',
+                stkDisplay: '987 654 321',
+                holder: 'PHAM THANH HUYEN'
+            }
+        };
+        let currentSTK = '';
+
+        function openHopModal(type) {
+            const d = hopData[type];
+            document.getElementById('modalPerson').textContent = d.person;
+            document.getElementById('modalQR').src = d.qr;
+            document.getElementById('modalBank').textContent = d.bank;
+            document.getElementById('modalSTK').textContent = d.stkDisplay;
+            document.getElementById('modalHolder').textContent = d.holder;
+            currentSTK = d.stk;
+            document.getElementById('hopModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeHopModal(e) {
+            if (e.target === document.getElementById('hopModal')) {
+                closeHopModalBtn();
+            }
+        }
+
+        function closeHopModalBtn() {
+            document.getElementById('hopModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        function copySTK() {
+            navigator.clipboard.writeText(currentSTK).then(() => {
+                const btn = document.querySelector('.hop-modal-copy-btn');
+                const original = btn.innerHTML;
+                btn.innerHTML = '<i class="fas fa-check"></i> Đã sao chép!';
+                btn.style.background = 'linear-gradient(135deg, #27ae60, #2ecc71)';
+                setTimeout(() => {
+                    btn.innerHTML = original;
+                    btn.style.background = '';
+                }, 2000);
+            });
+        }
     </script>
 </body>
 
