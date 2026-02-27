@@ -730,14 +730,11 @@
         }
 
         .hop-modal-qr {
-            width: 180px;
-            height: 180px;
-            margin: 0 auto 20px;
+            height: 300px;
             border-radius: 14px;
             overflow: hidden;
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
             background: white;
-            padding: 6px;
         }
 
         .hop-modal-qr img {
@@ -788,6 +785,35 @@
         .hop-modal-copy-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 20px rgba(139, 26, 26, 0.45);
+        }
+
+        .hop-modal-download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #1a5276, #2980b9);
+            color: white;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 25px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-bottom: 20px;
+            margin-left: 8px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 15px rgba(26, 82, 118, 0.35);
+        }
+
+        .hop-modal-download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(26, 82, 118, 0.45);
+        }
+
+        .hop-modal-download-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
         }
 
         .hop-modal-thankyou {
@@ -1585,7 +1611,7 @@
             <div class="couple-grid">
                 <div class="person-card" data-aos="fade-right">
                     <div class="image-frame">
-                        <img src="images/DSC05054.jpg" alt="Bride">
+                        <img src="images/codau.png" alt="Bride">
                     </div>
                     <h2 class="person-name">Thanh Huyền</h2>
                     <p style="font-weight: 600; color: var(--primary-color);">2002</p>
@@ -1593,7 +1619,7 @@
                 </div>
                 <div class="person-card" data-aos="fade-left">
                     <div class="image-frame">
-                        <img src="images/DSC05630.jpg" alt="Groom">
+                        <img src="images/chure.png" alt="Groom">
                     </div>
                     <h2 class="person-name">Trường An</h2>
                     <p style="font-weight: 600; color: var(--primary-color);">1998</p>
@@ -1851,8 +1877,8 @@
                 <div class="bank-card" onclick="openHopModal('groom')">
                     <div class="bank-card-icon">♥</div>
                     <h3>Thái Trường An</h3>
-                    <span class="bank-name-tag">MB Bank</span>
-                    <div class="bank-stk">6868 1234 89999</div>
+                    <span class="bank-name-tag">Techcombank</span>
+                    <div class="bank-stk">4156 5555 55</div>
                     <div class="bank-holder">Chú rể</div>
                     <div class="qr-preview">
                         <img src="images/QR-chu-re.png" alt="QR Chú rể" class="no-lightbox">
@@ -1864,8 +1890,8 @@
                     <div class="bank-card-icon" style="background: linear-gradient(135deg, #b5477a, #e84393);">♥</div>
                     <h3>Phạm Thanh Huyền</h3>
                     <span class="bank-name-tag"
-                        style="background: linear-gradient(135deg, #b5477a, #e84393);">Vietcombank</span>
-                    <div class="bank-stk">987 654 321</div>
+                        style="background: linear-gradient(135deg, #b5477a, #e84393);">BIDV</span>
+                    <div class="bank-stk">2153237626</div>
                     <div class="bank-holder">Cô dâu</div>
                     <div class="qr-preview">
                         <img src="images/QR-co-dau.png" alt="QR Cô dâu" class="no-lightbox">
@@ -1913,6 +1939,9 @@
                 <div class="hop-modal-holder" id="modalHolder"></div>
                 <button class="hop-modal-copy-btn" onclick="copySTK()">
                     <i class="fas fa-copy"></i> Sao chép số tài khoản
+                </button>
+                <button class="hop-modal-download-btn" onclick="downloadQR()">
+                    <i class="fas fa-download"></i> Tải QR xuống
                 </button>
                 <div class="hop-modal-thankyou">
                     Cảm ơn bạn đã đồng hành cùng chúng mình trong ngày trọng đại!
@@ -2224,17 +2253,17 @@
             groom: {
                 person: 'Chú Rể • Trường An',
                 qr: 'images/QR-chu-re.png',
-                bank: 'MB Bank',
-                stk: '6868123489999',
-                stkDisplay: '6868 1234 89999',
+                bank: 'Techcombank',
+                stk: '4156555555',
+                stkDisplay: '4156 5555 55',
                 holder: 'THAI TRUONG AN'
             },
             bride: {
                 person: 'Cô Dâu • Thanh Huyền',
                 qr: 'images/QR-co-dau.png',
-                bank: 'Vietcombank',
-                stk: '987654321',
-                stkDisplay: '987 654 321',
+                bank: 'BIDV',
+                stk: '2153237626',
+                stkDisplay: '2153 2376 26',
                 holder: 'PHAM THANH HUYEN'
             }
         };
@@ -2274,6 +2303,42 @@
                     btn.style.background = '';
                 }, 2000);
             });
+        }
+
+        function downloadQR() {
+            const qrImg = document.getElementById('modalQR');
+            const person = document.getElementById('modalPerson').textContent;
+            const fileName = 'QR-' + person.replace(/[^a-zA-Z0-9]/g, '-') + '.png';
+            const btn = document.querySelector('.hop-modal-download-btn');
+            const original = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Đang tải...';
+            btn.disabled = true;
+
+            fetch(qrImg.src)
+                .then(res => res.blob())
+                .then(blob => {
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = fileName;
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+                    btn.innerHTML = '<i class="fas fa-check"></i> Đã tải!';
+                    btn.style.background = 'linear-gradient(135deg, #27ae60, #2ecc71)';
+                    setTimeout(() => {
+                        btn.innerHTML = original;
+                        btn.style.background = '';
+                        btn.disabled = false;
+                    }, 2000);
+                })
+                .catch(() => {
+                    // Fallback: open in new tab
+                    window.open(qrImg.src, '_blank');
+                    btn.innerHTML = original;
+                    btn.disabled = false;
+                });
         }
     </script>
 </body>
