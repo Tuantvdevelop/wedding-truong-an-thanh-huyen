@@ -50,6 +50,36 @@
             z-index: 9999;
         }
 
+        /* Lazy Load Placeholder Shimmer */
+        img[loading="lazy"] {
+            background: linear-gradient(90deg, #f0ece4 25%, #e8e0d5 50%, #f0ece4 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+        }
+
+        img[loading="lazy"].loaded {
+            background: none;
+            animation: none;
+        }
+
+        @keyframes shimmer {
+            0% {
+                background-position: 200% 0;
+            }
+
+            100% {
+                background-position: -200% 0;
+            }
+        }
+
+        img {
+            transition: opacity 0.4s ease;
+        }
+
+        img:not([src]) {
+            opacity: 0;
+        }
+
         /* Music Toggle Button */
         #music-toggle {
             position: fixed;
@@ -1639,7 +1669,7 @@
         <p class="hero-sub" data-aos="fade-up">Hôn lễ của chúng mình</p>
 
         <div class="hero-image-circle" data-aos="zoom-in" data-aos-delay="300">
-            <img src="images/DSC06042.jpg" alt="Couple">
+            <img src="images/DSC06042.jpg" alt="Couple" fetchpriority="high">
         </div>
 
         <div class="countdown" id="countdown" data-aos="fade-up" data-aos-delay="500">
@@ -1667,7 +1697,7 @@
             <div class="couple-grid">
                 <div class="person-card" data-aos="fade-right">
                     <div class="image-frame">
-                        <img src="images/codau.png" alt="Bride">
+                        <img src="images/codau.png" alt="Bride" loading="lazy" decoding="async">
                     </div>
                     <h2 class="person-name">Thanh Huyền</h2>
                     <p style="font-weight: 600; color: var(--primary-color);">2002</p>
@@ -1675,7 +1705,7 @@
                 </div>
                 <div class="person-card" data-aos="fade-left">
                     <div class="image-frame">
-                        <img src="images/chure.png" alt="Groom">
+                        <img src="images/chure.png" alt="Groom" loading="lazy" decoding="async">
                     </div>
                     <h2 class="person-name">Trường An</h2>
                     <p style="font-weight: 600; color: var(--primary-color);">1998</p>
@@ -1791,7 +1821,7 @@
 
                 <!-- Tiệc Cưới Nhà Gái -->
                 <div class="event-card">
-                    <img src="images/DSC06147.jpg" class="event-img">
+                    <img src="images/DSC06147.jpg" class="event-img" loading="lazy" decoding="async">
                     <h3 class="font-romantic" style="font-size: 2rem;">Tiệc Cưới Nhà Gái</h3>
                     <p style="font-weight:600; color: var(--primary-color);">9h30 • 09/03/2026</p>
                     <p style="font-size:0.82rem; color:#aaa; margin-bottom:8px;">Nhằm ngày 21 tháng 01 năm Bính Ngọ</p>
@@ -1804,7 +1834,7 @@
 
                 <!-- Tiệc Cưới Nhà Trai -->
                 <div class="event-card">
-                    <img src="images/DSC06042.jpg" class="event-img">
+                    <img src="images/DSC06042.jpg" class="event-img" loading="lazy" decoding="async">
                     <h3 class="font-romantic" style="font-size: 2rem;">Tiệc Cưới Nhà Trai</h3>
                     <p style="font-weight:600; color: var(--primary-color);">10h30 • 15/03/2026</p>
                     <p style="font-size:0.82rem; color:#aaa; margin-bottom:8px;">Nhằm ngày 27 tháng Giêng năm Bính Ngọ
@@ -1832,17 +1862,17 @@
             <!-- Swiper -->
             <div class="swiper mySwiper" data-aos="zoom-in">
                 <div class="swiper-wrapper">
-                    <div class="swiper-slide"><img src="images/DSC05020.jpg"></div>
-                    <div class="swiper-slide"><img src="images/DSC05054.jpg"></div>
-                    <div class="swiper-slide"><img src="images/DSC05586.jpg"></div>
-                    <div class="swiper-slide"><img src="images/DSC05630.jpg"></div>
-                    <div class="swiper-slide"><img src="images/DSC05745.jpg"></div>
-                    <div class="swiper-slide"><img src="images/DSC05932.jpg"></div>
-                    <div class="swiper-slide"><img src="images/DSC06042.jpg"></div>
-                    <div class="swiper-slide"><img src="images/DSC06147.jpg"></div>
-                    <div class="swiper-slide"><img src="images/DSC04515.jpg"></div>
-                    <div class="swiper-slide"><img src="images/DSC04522.jpg"></div>
-                    <div class="swiper-slide"><img src="images/DSC04764.jpg"></div>
+                    <div class="swiper-slide"><img src="images/DSC05020.jpg" loading="lazy" decoding="async"></div>
+                    <div class="swiper-slide"><img src="images/DSC05054.jpg" loading="lazy" decoding="async"></div>
+                    <div class="swiper-slide"><img src="images/DSC05586.jpg" loading="lazy" decoding="async"></div>
+                    <div class="swiper-slide"><img src="images/DSC05630.jpg" loading="lazy" decoding="async"></div>
+                    <div class="swiper-slide"><img src="images/DSC05745.jpg" loading="lazy" decoding="async"></div>
+                    <div class="swiper-slide"><img src="images/DSC05932.jpg" loading="lazy" decoding="async"></div>
+                    <div class="swiper-slide"><img src="images/DSC06042.jpg" loading="lazy" decoding="async"></div>
+                    <div class="swiper-slide"><img src="images/DSC06147.jpg" loading="lazy" decoding="async"></div>
+                    <div class="swiper-slide"><img src="images/DSC04515.jpg" loading="lazy" decoding="async"></div>
+                    <div class="swiper-slide"><img src="images/DSC04522.jpg" loading="lazy" decoding="async"></div>
+                    <div class="swiper-slide"><img src="images/DSC04764.jpg" loading="lazy" decoding="async"></div>
                 </div>
                 <div class="swiper-button-next" style="color: var(--primary-color);"></div>
                 <div class="swiper-button-prev" style="color: var(--primary-color);"></div>
@@ -1856,38 +1886,65 @@
             <h2 class="section-title" data-aos="fade-up">Album Kỷ Niệm</h2>
             <div class="heart-container" data-aos="zoom-in">
                 <div class="heart-wall">
-                    <div class="heart-item h-r1-c2"><img src="images/DSC04515.jpg"></div>
-                    <div class="heart-item h-r1-c3"><img src="images/DSC04522.jpg"></div>
-                    <div class="heart-item h-r1-c5"><img src="images/DSC04764.jpg"></div>
-                    <div class="heart-item h-r1-c6"><img src="images/DSC05020.jpg"></div>
+                    <div class="heart-item h-r1-c2"><img src="images/DSC04515.jpg" loading="lazy" decoding="async">
+                    </div>
+                    <div class="heart-item h-r1-c3"><img src="images/DSC04522.jpg" loading="lazy" decoding="async">
+                    </div>
+                    <div class="heart-item h-r1-c5"><img src="images/DSC04764.jpg" loading="lazy" decoding="async">
+                    </div>
+                    <div class="heart-item h-r1-c6"><img src="images/DSC05020.jpg" loading="lazy" decoding="async">
+                    </div>
 
-                    <div class="heart-item h-r2-c1"><img src="images/DSC05054.jpg"></div>
-                    <div class="heart-item h-r2-c2"><img src="images/DSC05586.jpg"></div>
-                    <div class="heart-item h-r2-c3"><img src="images/DSC05630.jpg"></div>
-                    <div class="heart-item h-r2-c4"><img src="images/DSC05745.jpg"></div>
-                    <div class="heart-item h-r2-c5"><img src="images/DSC05932.jpg"></div>
-                    <div class="heart-item h-r2-c6"><img src="images/DSC06042.jpg"></div>
-                    <div class="heart-item h-r2-c7"><img src="images/DSC06147.jpg"></div>
+                    <div class="heart-item h-r2-c1"><img src="images/DSC05054.jpg" loading="lazy" decoding="async">
+                    </div>
+                    <div class="heart-item h-r2-c2"><img src="images/DSC05586.jpg" loading="lazy" decoding="async">
+                    </div>
+                    <div class="heart-item h-r2-c3"><img src="images/DSC05630.jpg" loading="lazy" decoding="async">
+                    </div>
+                    <div class="heart-item h-r2-c4"><img src="images/DSC05745.jpg" loading="lazy" decoding="async">
+                    </div>
+                    <div class="heart-item h-r2-c5"><img src="images/DSC05932.jpg" loading="lazy" decoding="async">
+                    </div>
+                    <div class="heart-item h-r2-c6"><img src="images/DSC06042.jpg" loading="lazy" decoding="async">
+                    </div>
+                    <div class="heart-item h-r2-c7"><img src="images/DSC06147.jpg" loading="lazy" decoding="async">
+                    </div>
 
-                    <div class="heart-item h-r3-c1"><img src="images/DSC04515.jpg"></div>
-                    <div class="heart-item h-r3-c2"><img src="images/DSC04522.jpg"></div>
-                    <div class="heart-item h-r3-c3"><img src="images/DSC04764.jpg"></div>
-                    <div class="heart-item h-r3-c4"><img src="images/DSC05020.jpg"></div>
-                    <div class="heart-item h-r3-c5"><img src="images/DSC05054.jpg"></div>
-                    <div class="heart-item h-r3-c6"><img src="images/DSC05586.jpg"></div>
-                    <div class="heart-item h-r3-c7"><img src="images/DSC05630.jpg"></div>
+                    <div class="heart-item h-r3-c1"><img src="images/DSC04515.jpg" loading="lazy" decoding="async">
+                    </div>
+                    <div class="heart-item h-r3-c2"><img src="images/DSC04522.jpg" loading="lazy" decoding="async">
+                    </div>
+                    <div class="heart-item h-r3-c3"><img src="images/DSC04764.jpg" loading="lazy" decoding="async">
+                    </div>
+                    <div class="heart-item h-r3-c4"><img src="images/DSC05020.jpg" loading="lazy" decoding="async">
+                    </div>
+                    <div class="heart-item h-r3-c5"><img src="images/DSC05054.jpg" loading="lazy" decoding="async">
+                    </div>
+                    <div class="heart-item h-r3-c6"><img src="images/DSC05586.jpg" loading="lazy" decoding="async">
+                    </div>
+                    <div class="heart-item h-r3-c7"><img src="images/DSC05630.jpg" loading="lazy" decoding="async">
+                    </div>
 
-                    <div class="heart-item h-r4-c2"><img src="images/DSC05745.jpg"></div>
-                    <div class="heart-item h-r4-c3"><img src="images/DSC05932.jpg"></div>
-                    <div class="heart-item h-r4-c4"><img src="images/DSC06042.jpg"></div>
-                    <div class="heart-item h-r4-c5"><img src="images/DSC06147.jpg"></div>
-                    <div class="heart-item h-r4-c6"><img src="images/DSC04515.jpg"></div>
+                    <div class="heart-item h-r4-c2"><img src="images/DSC05745.jpg" loading="lazy" decoding="async">
+                    </div>
+                    <div class="heart-item h-r4-c3"><img src="images/DSC05932.jpg" loading="lazy" decoding="async">
+                    </div>
+                    <div class="heart-item h-r4-c4"><img src="images/DSC06042.jpg" loading="lazy" decoding="async">
+                    </div>
+                    <div class="heart-item h-r4-c5"><img src="images/DSC06147.jpg" loading="lazy" decoding="async">
+                    </div>
+                    <div class="heart-item h-r4-c6"><img src="images/DSC04515.jpg" loading="lazy" decoding="async">
+                    </div>
 
-                    <div class="heart-item h-r5-c3"><img src="images/DSC04522.jpg"></div>
-                    <div class="heart-item h-r5-c4"><img src="images/DSC04764.jpg"></div>
-                    <div class="heart-item h-r5-c5"><img src="images/DSC05020.jpg"></div>
+                    <div class="heart-item h-r5-c3"><img src="images/DSC04522.jpg" loading="lazy" decoding="async">
+                    </div>
+                    <div class="heart-item h-r5-c4"><img src="images/DSC04764.jpg" loading="lazy" decoding="async">
+                    </div>
+                    <div class="heart-item h-r5-c5"><img src="images/DSC05020.jpg" loading="lazy" decoding="async">
+                    </div>
 
-                    <div class="heart-item h-r6-c4"><img src="images/DSC05054.jpg"></div>
+                    <div class="heart-item h-r6-c4"><img src="images/DSC05054.jpg" loading="lazy" decoding="async">
+                    </div>
                 </div>
             </div>
         </div>
@@ -1937,7 +1994,8 @@
                     <div class="bank-stk">4156 5555 55</div>
                     <div class="bank-holder">Chú rể</div>
                     <div class="qr-preview">
-                        <img src="images/QR-chu-re.png" alt="QR Chú rể" class="no-lightbox">
+                        <img src="images/QR-chu-re.png" alt="QR Chú rể" class="no-lightbox" loading="lazy"
+                            decoding="async">
                     </div>
                     <p class="tap-hint">&#128247; Bấm để xem QR của chú rể</p>
                 </div>
@@ -1950,7 +2008,8 @@
                     <div class="bank-stk">2153237626</div>
                     <div class="bank-holder">Cô dâu</div>
                     <div class="qr-preview">
-                        <img src="images/QR-co-dau.png" alt="QR Cô dâu" class="no-lightbox">
+                        <img src="images/QR-co-dau.png" alt="QR Cô dâu" class="no-lightbox" loading="lazy"
+                            decoding="async">
                     </div>
                     <p class="tap-hint">&#128247; Bấm để xem QR của cô dâu</p>
                 </div>
@@ -2396,6 +2455,19 @@
                     btn.disabled = false;
                 });
         }
+    </script>
+
+    <!-- ===== LAZY LOAD IMAGE HANDLER ===== -->
+    <script>
+        document.querySelectorAll('img[loading="lazy"]').forEach(function (img) {
+            if (img.complete && img.naturalWidth > 0) {
+                img.classList.add('loaded');
+            } else {
+                img.addEventListener('load', function () {
+                    img.classList.add('loaded');
+                });
+            }
+        });
     </script>
 
     <!-- ===== BACKGROUND MUSIC CONTROLLER ===== -->
