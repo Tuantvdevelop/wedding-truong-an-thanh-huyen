@@ -1196,6 +1196,124 @@
             }
         }
 
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-180px) scale(1.3);
+                opacity: 0;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Wish Thank-You Modal */
+        .wish-modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.55);
+            z-index: 20000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            backdrop-filter: blur(4px);
+        }
+
+        .wish-modal-overlay.active {
+            display: flex;
+        }
+
+        .wish-modal {
+            background: #fff;
+            border-radius: 24px;
+            width: 100%;
+            max-width: 340px;
+            text-align: center;
+            overflow: hidden;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.25);
+            animation: modalPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+        }
+
+        .wish-modal-top {
+            background: linear-gradient(135deg, #c2185b, #e91e63, #f48fb1);
+            padding: 30px 20px 24px;
+        }
+
+        .wish-modal-heart {
+            font-size: 3rem;
+            display: block;
+            margin-bottom: 8px;
+            animation: heartBeat 0.8s ease infinite alternate;
+        }
+
+        @keyframes heartBeat {
+            from {
+                transform: scale(1);
+            }
+
+            to {
+                transform: scale(1.15);
+            }
+        }
+
+        .wish-modal-top h3 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2rem;
+            color: white;
+            margin: 0;
+        }
+
+        .wish-modal-body {
+            padding: 24px 28px 28px;
+        }
+
+        .wish-modal-body p {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .wish-modal-body strong {
+            color: #c2185b;
+            font-size: 1.05rem;
+        }
+
+        .wish-modal-close-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #c2185b, #e91e63);
+            color: white;
+            border: none;
+            padding: 10px 28px;
+            border-radius: 25px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(194, 24, 91, 0.35);
+            transition: transform 0.2s;
+        }
+
+        .wish-modal-close-btn:hover {
+            transform: translateY(-2px);
+        }
+
         .lightbox-close {
             position: absolute;
             top: 20px;
@@ -1224,7 +1342,6 @@
             <li><a href="#home">Trang chủ</a></li>
             <li><a href="#couple">Cặp đôi</a></li>
             <li><a href="#family">Gia đình</a></li>
-            <li><a href="#story">Chuyện tình</a></li>
             <li><a href="#gallery">Thư viện</a></li>
             <li><a href="#wishes">Lời chúc</a></li>
             <li><a href="#events">Sự kiện</a></li>
@@ -1320,6 +1437,16 @@
                         <div class="family-info-label">Địa chỉ nhà trai</div>
                         <div class="family-info-value">Thôn 11, xã Đắk Mar, tỉnh Quảng Ngãi</div>
                     </div>
+                    <div class="family-info-row">
+                        <div class="family-info-label">Địa điểm tổ chức</div>
+                        <div class="family-info-value">Tại tại tư gia nhà trai, Thôn 11, xã Đắk Mar, tỉnh Quảng Ngãi
+                        </div>
+                        <a class="family-map-btn"
+                            href="https://www.google.com/maps?q=14.5808974,107.9202632&entry=gps&lucs=,94231188,47071704,94218641,94282134,94286869&g_ep=CAISEjI1LjI1LjMuNzcyMTMyNjA2MBgAIIgnKi0sOTQyMzExODgsNDcwNzE3MDQsOTQyMTg2NDEsOTQyODIxMzQsOTQyODY4NjlCAlZO&skid=63bd3310-401f-4e24-979f-14f33c3a3d44&g_st=ipc"
+                            target="_blank" rel="noopener noreferrer">
+                            <i class="fas fa-map-marker-alt"></i> Xem trên Google Maps
+                        </a>
+                    </div>
                 </div>
 
                 <!-- Nhà Gái -->
@@ -1375,23 +1502,34 @@
         <div class="container">
             <h2 class="section-title">Thời Gian &amp; Địa Điểm</h2>
             <div class="event-grid">
-                <div class="event-card">
-                    <img src="images/DSC06042.jpg" class="event-img">
-                    <h3 class="font-romantic" style="font-size: 2rem;">Lễ Ăn Hỏi</h3>
-                    <p>08:00 - 21/12/2025</p>
-                    <p>Số nhà 2, ngõ 302 đường Chi Lăng, xã Phù Ninh, tỉnh Phú Thọ</p>
-                    <a href="#" style="color: var(--primary-color); text-decoration: none; font-size: 0.8rem;">Xem vị
-                        trí</a>
-                </div>
+
+                <!-- Tiệc Cưới Nhà Gái -->
                 <div class="event-card">
                     <img src="images/DSC06147.jpg" class="event-img">
-                    <h3 class="font-romantic" style="font-size: 2rem;">Tiệc Cưới</h3>
-                    <p>10:30 - 09/03/2026</p>
+                    <h3 class="font-romantic" style="font-size: 2rem;">Tiệc Cưới Nhà Gái</h3>
+                    <p style="font-weight:600; color: var(--primary-color);">9h30 • 09/03/2026</p>
+                    <p style="font-size:0.82rem; color:#aaa; margin-bottom:8px;">Nhằm ngày 21 tháng 01 năm Bính Ngọ</p>
                     <p>Nhà hàng Quang Nghĩa, số 489 đường Chi Lăng, xã Phù Ninh, tỉnh Phú Thọ</p>
                     <a href="https://www.google.com/maps?q=Nh%C3%A0+H%C3%A0ng+Quang+Ngh%C4%A9a,+QL2,+TT.+Phong+Ch%C3%A2u,+Ph%C3%B9+Ninh,+Ph%C3%BA+Th%E1%BB%8D&ftid=0x3134915f9a952e59:0xdc8ea5cefda0f4cc&entry=gps"
-                        target="_blank"
-                        style="color: var(--primary-color); text-decoration: none; font-size: 0.8rem;">Xem vị trí</a>
+                        target="_blank" style="color: var(--primary-color); text-decoration: none; font-size: 0.8rem;">
+                        <i class="fas fa-map-marker-alt"></i> Xem vị trí
+                    </a>
                 </div>
+
+                <!-- Tiệc Cưới Nhà Trai -->
+                <div class="event-card">
+                    <img src="images/DSC06042.jpg" class="event-img">
+                    <h3 class="font-romantic" style="font-size: 2rem;">Tiệc Cưới Nhà Trai</h3>
+                    <p style="font-weight:600; color: var(--primary-color);">10h30 • 15/03/2026</p>
+                    <p style="font-size:0.82rem; color:#aaa; margin-bottom:8px;">Nhằm ngày 27 tháng Giêng năm Bính Ngọ
+                    </p>
+                    <p>Tại tư gia nhà trai, Thôn 11, xã Đắk Mar, tỉnh Quảng Ngãi</p>
+                    <a href="https://maps.app.goo.gl/LdZ1iChJAV1jJRaY8?g_st=ipc" target="_blank"
+                        style="color: var(--primary-color); text-decoration: none; font-size: 0.8rem;">
+                        <i class="fas fa-map-marker-alt"></i> Xem vị trí
+                    </a>
+                </div>
+
             </div>
         </div>
     </section>
@@ -1401,32 +1539,6 @@
             <i class="fas fa-play" style="color: white; font-size: 3rem;"></i>
         </div>
     </div>
-
-    <section class="story" id="story">
-        <div class="container">
-            <h2 class="section-title" data-aos="fade-up">Câu Chuyện Của Chúng Ta</h2>
-            <div class="story-timeline">
-                <div class="story-item" data-aos="fade-right">
-                    <img src="images/DSC04522.jpg" class="story-img">
-                    <div class="story-content">
-                        <h3 class="font-romantic" style="font-size: 2rem;">Lần đầu gặp gỡ</h3>
-                        <span class="story-date">Ngày 12 tháng 02 năm 2016</span>
-                        <p>Tôi quyết định chọn chuyến bay sớm nhất ngay sau cuộc trò chuyện của tôi với cô ấy để trở về
-                            Hà Nội...</p>
-                    </div>
-                </div>
-                <div class="story-item" data-aos="fade-left">
-                    <img src="images/DSC04764.jpg" class="story-img">
-                    <div class="story-content">
-                        <h3 class="font-romantic" style="font-size: 2rem;">Ngày đầu tiên</h3>
-                        <span class="story-date">Ngày 23 tháng 04 năm 2016</span>
-                        <p>Lần đầu tiên, khi gặp anh ấy đầu óc tôi nên trống rỗng, bao nhiêu tự tin của tôi đều biến
-                            mất...</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <section class="gallery" id="gallery">
         <div class="container">
@@ -1509,12 +1621,12 @@
                     <div class="form-group">
                         <textarea rows="5" placeholder="Lời chúc của bạn *"></textarea>
                     </div>
-                    <button class="btn">Gửi lời chúc</button>
+                    <button class="btn" id="wishSubmitBtn" onclick="submitWish()">Gửi lời chúc</button>
                 </div>
                 <div class="wish-list">
                     <div style="margin-bottom: 20px;">
                         <strong>Dương Minh Thảo</strong>
-                        <p style="font-size: 0.8rem; color: #888;">Chúc hai bạn trăm năm hạnh phúc <3< /p>
+                        <p style="font-size: 0.8rem; color: #888;">Chúc hai bạn trăm năm hạnh phúc</p>
                     </div>
                     <div style="margin-bottom: 20px;">
                         <strong>Lê Thu Sơn</strong>
@@ -1559,6 +1671,25 @@
             </div>
         </div>
     </section>
+
+    <!-- LỜI CẢM ƠN MODAL -->
+    <div class="wish-modal-overlay" id="wishModal" onclick="handleWishOverlayClick(event)">
+        <div class="wish-modal">
+            <div class="wish-modal-top">
+                <span class="wish-modal-heart">💖</span>
+                <h3>Cảm Ơn Bạn!</h3>
+            </div>
+            <div class="wish-modal-body">
+                <p>
+                    Chệ ải cảm ơn <strong id="wishModalName"></strong> đã gửi lời chúc đến hai chúng mình!
+                    Lời chúc của bạn là món quà ý nghĩa nhất trong ngày đặc biệt này. 💕
+                </p>
+                <button class="wish-modal-close-btn" onclick="closeWishModal()">
+                    <i class="fas fa-heart"></i> Thân ái!
+                </button>
+            </div>
+        </div>
+    </div>
 
     <!-- HỘP MỮNG CƯỚI MODAL -->
     <div class="hop-modal-overlay" id="hopModal" onclick="closeHopModal(event)">
@@ -1701,7 +1832,7 @@
         });
 
         // Countdown Timer
-        const weddingDate = new Date("March 9, 2026 10:30:00").getTime();
+        const weddingDate = new Date("March 9, 2026 09:30:00").getTime();
 
         const timer = setInterval(function () {
             const now = new Date().getTime();
@@ -1757,6 +1888,85 @@
 
         lightboxClose.onclick = closeLightbox;
         lightbox.onclick = closeLightbox;
+
+        // === WISH THANK YOU MODAL ===
+        function submitWish() {
+            const nameInput = document.querySelector('.wish-form input[type="text"]');
+            const wishInput = document.querySelector('.wish-form textarea');
+            const name = nameInput.value.trim();
+            const wish = wishInput.value.trim();
+
+            if (!name) {
+                nameInput.style.borderColor = '#e84393';
+                nameInput.focus();
+                nameInput.placeholder = 'Vui lòng nhập tên của bạn ⚠️';
+                setTimeout(() => {
+                    nameInput.style.borderColor = '';
+                    nameInput.placeholder = 'Tên của bạn *';
+                }, 2500);
+                return;
+            }
+            if (!wish) {
+                wishInput.style.borderColor = '#e84393';
+                wishInput.focus();
+                wishInput.placeholder = 'Vui lòng nhập lời chúc của bạn ⚠️';
+                setTimeout(() => {
+                    wishInput.style.borderColor = '';
+                    wishInput.placeholder = 'Lời chúc của bạn *';
+                }, 2500);
+                return;
+            }
+
+            // Show thank-you modal
+            document.getElementById('wishModalName').textContent = name;
+            document.getElementById('wishModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+            launchHearts();
+
+            // Add to wish list
+            const wishList = document.querySelector('.wish-list');
+            const newWish = document.createElement('div');
+            newWish.style.cssText = 'margin-bottom:20px; animation: fadeIn 0.5s ease;';
+            newWish.innerHTML = `<strong>${name}</strong><p style="font-size:0.8rem; color:#888;">${wish}</p>`;
+            wishList.insertBefore(newWish, wishList.firstChild);
+
+            // Reset form
+            nameInput.value = '';
+            wishInput.value = '';
+
+            // Auto close after 4s
+            setTimeout(closeWishModal, 7000);
+        }
+
+        function closeWishModal() {
+            document.getElementById('wishModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        function handleWishOverlayClick(e) {
+            if (e.target === document.getElementById('wishModal')) {
+                closeWishModal();
+            }
+        }
+
+        function launchHearts() {
+            const modal = document.getElementById('wishModal');
+            for (let i = 0; i < 12; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('span');
+                    heart.className = 'float-heart';
+                    heart.textContent = ['❤️', '💕', '💖', '💗', '💝'][Math.floor(Math.random() * 5)];
+                    heart.style.cssText = `
+                        position:absolute; font-size:${1.2 + Math.random()}rem;
+                        left:${10 + Math.random() * 80}%;
+                        bottom: 20%; animation: floatUp ${1.5 + Math.random()}s ease forwards;
+                        pointer-events:none; z-index:1;
+                    `;
+                    modal.querySelector('.wish-modal').appendChild(heart);
+                    setTimeout(() => heart.remove(), 2500);
+                }, i * 120);
+            }
+        }
 
         // === HOP MUNG CUOI MODAL ===
         const hopData = {
