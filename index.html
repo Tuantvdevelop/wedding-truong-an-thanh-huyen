@@ -1,0 +1,1447 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thái Trường An & Phạm Thu Huyền - Wedding Invitation</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <style>
+        :root {
+            --primary-color: #d4af37;
+            --secondary-color: #fdfaf6;
+            --text-color: #4a4a4a;
+            --accent-color: #e8d5c4;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text-color);
+            line-height: 1.6;
+            background-color: var(--secondary-color);
+            overflow-x: hidden;
+        }
+
+        #petal-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        h1,
+        h2,
+        h3,
+        .font-romantic {
+            font-family: 'Great Vibes', cursive;
+            color: var(--primary-color);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 15px 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding-top: 60px;
+            background: radial-gradient(circle, #fff 0%, #fdfaf6 100%);
+        }
+
+        .hero-names {
+            font-size: 5rem;
+            margin-bottom: 10px;
+        }
+
+        .hero-sub {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+
+        .hero-image-circle {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            border: 10px solid var(--white);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .hero-image-circle img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Countdown */
+        .countdown {
+            display: flex;
+            gap: 20px;
+        }
+
+        .countdown-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .countdown-val {
+            font-size: 2rem;
+            font-weight: 300;
+        }
+
+        .countdown-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+        }
+
+        /* Couple Section */
+        .couple {
+            padding: 100px 0;
+            background: var(--white);
+        }
+
+        .couple-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .person-card {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .image-frame {
+            position: relative;
+            padding: 20px;
+            display: inline-block;
+        }
+
+        .image-frame::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border: 1px solid var(--primary-color);
+            transform: rotate(3deg);
+            z-index: 1;
+        }
+
+        .image-frame img {
+            width: 350px;
+            height: 450px;
+            object-fit: cover;
+            position: relative;
+            z-index: 2;
+        }
+
+        .person-name {
+            font-size: 2.5rem;
+            margin-top: 20px;
+        }
+
+        .person-quote {
+            font-style: italic;
+            color: #888;
+            margin-top: 10px;
+        }
+
+        /* Banner Image */
+        .banner-large {
+            width: 100%;
+            height: 600px;
+            background: url('images/DSC05745.jpg') center/cover no-repeat;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .heart-overlay {
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+            clip-path: path('M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z');
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Story Section */
+        .story {
+            padding: 100px 0;
+        }
+
+        .story-timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .story-item {
+            display: flex;
+            margin-bottom: 50px;
+            background: var(--white);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .story-img {
+            width: 300px;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .story-content {
+            padding: 30px;
+            flex: 1;
+        }
+
+        .story-date {
+            font-weight: 600;
+            color: var(--primary-color);
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        /* Gallery & Swiper */
+        .gallery {
+            padding: 100px 0;
+            background: var(--white);
+        }
+
+        .swiper {
+            width: 100%;
+            height: 500px;
+            padding-bottom: 50px;
+        }
+
+        .swiper-slide {
+            text-align: center;
+            font-size: 18px;
+            background: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .swiper-slide img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        /* Heart Gallery */
+        .heart-gallery {
+            padding: 100px 0;
+            background: #fff;
+            text-align: center;
+        }
+
+        .heart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            height: 600px;
+            margin: 50px auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .heart-wall {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            grid-template-rows: repeat(6, 1fr);
+            gap: 10px;
+            width: 100%;
+            height: 100%;
+        }
+
+        .heart-item {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            border-radius: 5px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            background: #eee;
+        }
+
+        .heart-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .heart-item:hover {
+            transform: scale(1.1);
+            z-index: 10;
+        }
+
+        /* Positions for heart shape in 7x7 grid */
+        .h-r1-c2 {
+            grid-area: 1 / 2;
+        }
+
+        .h-r1-c3 {
+            grid-area: 1 / 3;
+        }
+
+        .h-r1-c5 {
+            grid-area: 1 / 5;
+        }
+
+        .h-r1-c6 {
+            grid-area: 1 / 6;
+        }
+
+        .h-r2-c1 {
+            grid-area: 2 / 1;
+        }
+
+        .h-r2-c2 {
+            grid-area: 2 / 2;
+        }
+
+        .h-r2-c3 {
+            grid-area: 2 / 3;
+        }
+
+        .h-r2-c4 {
+            grid-area: 2 / 4;
+        }
+
+        .h-r2-c5 {
+            grid-area: 2 / 5;
+        }
+
+        .h-r2-c6 {
+            grid-area: 2 / 6;
+        }
+
+        .h-r2-c7 {
+            grid-area: 2 / 7;
+        }
+
+        .h-r3-c1 {
+            grid-area: 3 / 1;
+        }
+
+        .h-r3-c2 {
+            grid-area: 3 / 2;
+        }
+
+        .h-r3-c3 {
+            grid-area: 3 / 3;
+        }
+
+        .h-r3-c4 {
+            grid-area: 3 / 4;
+        }
+
+        .h-r3-c5 {
+            grid-area: 3 / 5;
+        }
+
+        .h-r3-c6 {
+            grid-area: 3 / 6;
+        }
+
+        .h-r3-c7 {
+            grid-area: 3 / 7;
+        }
+
+        .h-r4-c2 {
+            grid-area: 4 / 2;
+        }
+
+        .h-r4-c3 {
+            grid-area: 4 / 3;
+        }
+
+        .h-r4-c4 {
+            grid-area: 4 / 4;
+        }
+
+        .h-r4-c5 {
+            grid-area: 4 / 5;
+        }
+
+        .h-r4-c6 {
+            grid-area: 4 / 6;
+        }
+
+        .h-r5-c3 {
+            grid-area: 5 / 3;
+        }
+
+        .h-r5-c4 {
+            grid-area: 5 / 4;
+        }
+
+        .h-r5-c5 {
+            grid-area: 5 / 5;
+        }
+
+        .h-r6-c4 {
+            grid-area: 6 / 4;
+        }
+
+        /* Wishes */
+        .wishes {
+            padding: 100px 0;
+            background: #fdfaf6;
+        }
+
+        .wish-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+
+        .wish-form,
+        .wish-list {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: inherit;
+        }
+
+        .btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #b8962d;
+        }
+
+        /* Bank Info */
+        .bank-info {
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .bank-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .bank-card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 15px;
+        }
+
+        .qr-code {
+            width: 150px;
+            height: 150px;
+            background: #eee;
+            margin: 20px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Family Info Section */
+        .family-info {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #fdfaf6 0%, #fff8f0 100%);
+        }
+
+        .family-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 20px;
+        }
+
+        .family-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(212, 175, 55, 0.12);
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .family-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 50px rgba(212, 175, 55, 0.2);
+        }
+
+        .family-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary-color), #f0c040);
+            border-radius: 20px 20px 0 0;
+        }
+
+        .family-card-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .family-card-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary-color), #f0c040);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+
+        .family-card-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--text-color);
+            letter-spacing: 0.5px;
+        }
+
+        .family-info-row {
+            margin-bottom: 20px;
+        }
+
+        .family-info-label {
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #aaa;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .family-info-value {
+            font-size: 1rem;
+            color: var(--text-color);
+            font-weight: 500;
+            padding: 10px 14px;
+            background: #fafafa;
+            border-radius: 8px;
+            border: 1px solid #f0ebe0;
+        }
+
+        .family-parents-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .family-parent-item .family-info-label {
+            font-size: 0.7rem;
+        }
+
+        .family-address {
+            margin-top: 5px;
+        }
+
+        .family-address .family-info-value {
+            min-height: 60px;
+            line-height: 1.6;
+        }
+
+        .family-map-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 12px;
+            padding: 9px 18px;
+            background: linear-gradient(135deg, #e84393, #f06292);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 4px 15px rgba(232, 67, 147, 0.35);
+        }
+
+        .family-map-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(232, 67, 147, 0.45);
+        }
+
+        .family-map-btn i {
+            font-size: 0.9rem;
+        }
+
+        /* Events */
+        .events {
+            padding: 100px 0;
+            background: var(--white);
+        }
+
+        .event-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+
+        .event-card {
+            border: 1px solid var(--accent-color);
+            padding: 40px;
+            text-align: center;
+            position: relative;
+        }
+
+        .event-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            margin-bottom: 20px;
+        }
+
+        /* Footer */
+        footer {
+            padding: 60px 0;
+            text-align: center;
+            background: var(--secondary-color);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 2.2rem;
+                margin-bottom: 2rem;
+            }
+
+            .container {
+                padding: 0 15px;
+            }
+
+            nav {
+                padding: 10px 0;
+            }
+
+            nav ul {
+                gap: 10px;
+                flex-wrap: wrap;
+                justify-content: center;
+                padding: 0 10px;
+            }
+
+            nav a {
+                font-size: 0.7rem;
+                letter-spacing: 0;
+            }
+
+            .hero-names {
+                font-size: 2.5rem;
+                line-height: 1.2;
+            }
+
+            .hero-image-circle {
+                width: 200px;
+                height: 200px;
+            }
+
+            .countdown {
+                gap: 10px;
+            }
+
+            .countdown-val {
+                font-size: 1.5rem;
+            }
+
+            .couple {
+                padding: 50px 0;
+            }
+
+            .couple-grid,
+            .wish-container,
+            .bank-grid,
+            .event-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .image-frame img {
+                width: 100%;
+                max-width: 300px;
+                height: auto;
+            }
+
+            .banner-large {
+                height: 300px;
+            }
+
+            .heart-overlay {
+                width: 200px;
+                height: 200px;
+            }
+
+            .story {
+                padding: 50px 0;
+            }
+
+            .story-item {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .story-img {
+                width: 100%;
+                height: 200px;
+            }
+
+            .gallery {
+                padding: 50px 0;
+            }
+
+            .swiper {
+                height: 350px;
+            }
+
+            .heart-gallery {
+                padding: 50px 0;
+            }
+
+            .heart-container {
+                height: 400px;
+                margin: 20px auto;
+            }
+
+            .wishes,
+            .bank-info,
+            .events,
+            .family-info {
+                padding: 50px 0;
+            }
+
+            .family-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            .family-card {
+                padding: 25px;
+            }
+
+            .family-parents-row {
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+            }
+
+            .wish-form,
+            .wish-list {
+                padding: 20px;
+            }
+
+            .event-card {
+                padding: 20px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .heart-wall {
+                gap: 5px;
+            }
+
+            .countdown-label {
+                font-size: 0.6rem;
+            }
+
+            .person-quote {
+                font-size: 0.9rem;
+                padding: 0 20px;
+            }
+
+            .story-content {
+                padding: 20px;
+            }
+
+            .story-content h3 {
+                font-size: 1.8rem !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-names {
+                font-size: 2rem;
+            }
+
+            .person-name {
+                font-size: 2rem;
+            }
+
+            .heart-container {
+                height: 300px;
+            }
+
+            .heart-wall {
+                gap: 5px;
+            }
+        }
+
+        /* Lightbox CSS */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 10000;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            border: 5px solid white;
+            border-radius: 5px;
+            animation: zoom 0.3s;
+        }
+
+        @keyframes zoom {
+            from {
+                transform: scale(0.5);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .lightbox-close:hover {
+            color: var(--primary-color);
+        }
+
+        img {
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <ul>
+            <li><a href="#home">Trang chủ</a></li>
+            <li><a href="#couple">Cặp đôi</a></li>
+            <li><a href="#family">Gia đình</a></li>
+            <li><a href="#story">Chuyện tình</a></li>
+            <li><a href="#gallery">Thư viện</a></li>
+            <li><a href="#wishes">Lời chúc</a></li>
+            <li><a href="#events">Sự kiện</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero" id="home">
+        <h1 class="hero-names" data-aos="zoom-in">Trường An & Thanh Huyền</h1>
+        <p class="hero-sub" data-aos="fade-up">Hôn lễ của chúng mình</p>
+
+        <div class="hero-image-circle" data-aos="zoom-in" data-aos-delay="300">
+            <img src="images/DSC04515.jpg" alt="Couple">
+        </div>
+
+        <div class="countdown" id="countdown" data-aos="fade-up" data-aos-delay="500">
+            <div class="countdown-item">
+                <span class="countdown-val" id="days">00</span>
+                <span class="countdown-label">Ngày</span>
+            </div>
+            <div class="countdown-item">
+                <span class="countdown-val" id="hours">00</span>
+                <span class="countdown-label">Giờ</span>
+            </div>
+            <div class="countdown-item">
+                <span class="countdown-val" id="minutes">00</span>
+                <span class="countdown-label">Phút</span>
+            </div>
+            <div class="countdown-item">
+                <span class="countdown-val" id="seconds">00</span>
+                <span class="countdown-label">Giây</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="couple" id="couple">
+        <div class="container">
+            <div class="couple-grid">
+                <div class="person-card" data-aos="fade-right">
+                    <div class="image-frame">
+                        <img src="images/DSC05054.jpg" alt="Bride">
+                    </div>
+                    <h2 class="person-name">Thanh Huyền</h2>
+                    <p style="font-weight: 600; color: var(--primary-color);">2002</p>
+                    <p class="person-quote">"Tôi hạnh phúc khi ở bên anh ấy"</p>
+                </div>
+                <div class="person-card" data-aos="fade-left">
+                    <div class="image-frame">
+                        <img src="images/DSC05630.jpg" alt="Groom">
+                    </div>
+                    <h2 class="person-name">Trường An</h2>
+                    <p style="font-weight: 600; color: var(--primary-color);">1998</p>
+                    <p class="person-quote">"Vợ là nóc nhà"</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Family Info Section -->
+    <section class="family-info" id="family">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Thông Tin Gia Đình</h2>
+            <div class="family-grid">
+
+                <!-- Nhà Trai -->
+                <div class="family-card" data-aos="fade-right">
+                    <div class="family-card-header">
+                        <div class="family-card-icon">
+                            <i class="fas fa-home"></i>
+                        </div>
+                        <div>
+                            <div class="family-info-label" style="margin-bottom:2px;">Nhà trai</div>
+                            <div class="family-card-title">Gia đình Chú rể</div>
+                        </div>
+                    </div>
+
+                    <div class="family-info-row">
+                        <div class="family-info-label">Danh xưng</div>
+                        <div class="family-info-value">Ông Bà</div>
+                    </div>
+
+                    <div class="family-parents-row">
+                        <div class="family-parent-item">
+                            <div class="family-info-label">Ông</div>
+                            <div class="family-info-value">Thái Văn Quảng</div>
+                        </div>
+                        <div class="family-parent-item">
+                            <div class="family-info-label">Bà</div>
+                            <div class="family-info-value">Phạm Thị Quý</div>
+                        </div>
+                    </div>
+
+                    <div class="family-info-row family-address">
+                        <div class="family-info-label">Địa chỉ nhà trai</div>
+                        <div class="family-info-value">Thôn 11, xã Đắk Mar, tỉnh Quảng Ngãi</div>
+                    </div>
+                </div>
+
+                <!-- Nhà Gái -->
+                <div class="family-card" data-aos="fade-left">
+                    <div class="family-card-header">
+                        <div class="family-card-icon" style="background: linear-gradient(135deg, #e8a0c0, #f5c6da);">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <div>
+                            <div class="family-info-label" style="margin-bottom:2px;">Nhà gái</div>
+                            <div class="family-card-title">Gia đình Cô dâu</div>
+                        </div>
+                    </div>
+
+                    <div class="family-info-row">
+                        <div class="family-info-label">Danh xưng</div>
+                        <div class="family-info-value">Ông Bà</div>
+                    </div>
+
+                    <div class="family-parents-row">
+                        <div class="family-parent-item">
+                            <div class="family-info-label">Ông</div>
+                            <div class="family-info-value">Phạm Văn Sắc</div>
+                        </div>
+                        <div class="family-parent-item">
+                            <div class="family-info-label">Bà</div>
+                            <div class="family-info-value">Nguyễn Thị Phương</div>
+                        </div>
+                    </div>
+
+                    <div class="family-info-row family-address">
+                        <div class="family-info-label">Địa chỉ nhà gái</div>
+                        <div class="family-info-value">Khu 6, xã Phù Ninh, tỉnh Phú Thọ</div>
+                    </div>
+
+                    <div class="family-info-row">
+                        <div class="family-info-label">Địa điểm tổ chức</div>
+                        <div class="family-info-value">Nhà hàng Quang Nghĩa, số 489 đường Chi Lăng, xã Phù Ninh, tỉnh
+                            Phú Thọ</div>
+                        <a class="family-map-btn"
+                            href="https://www.google.com/maps?q=Nh%C3%A0+H%C3%A0ng+Quang+Ngh%C4%A9a,+QL2,+TT.+Phong+Ch%C3%A2u,+Ph%C3%B9+Ninh,+Ph%C3%BA+Th%E1%BB%8D&ftid=0x3134915f9a952e59:0xdc8ea5cefda0f4cc&entry=gps"
+                            target="_blank" rel="noopener noreferrer">
+                            <i class="fas fa-map-marker-alt"></i> Xem trên Google Maps
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <div class="banner-large" data-aos="zoom-out">
+        <div class="heart-overlay">
+            <i class="fas fa-play" style="color: white; font-size: 3rem;"></i>
+        </div>
+    </div>
+
+    <section class="story" id="story">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Câu Chuyện Của Chúng Ta</h2>
+            <div class="story-timeline">
+                <div class="story-item" data-aos="fade-right">
+                    <img src="images/DSC04522.jpg" class="story-img">
+                    <div class="story-content">
+                        <h3 class="font-romantic" style="font-size: 2rem;">Lần đầu gặp gỡ</h3>
+                        <span class="story-date">Ngày 12 tháng 02 năm 2016</span>
+                        <p>Tôi quyết định chọn chuyến bay sớm nhất ngay sau cuộc trò chuyện của tôi với cô ấy để trở về
+                            Hà Nội...</p>
+                    </div>
+                </div>
+                <div class="story-item" data-aos="fade-left">
+                    <img src="images/DSC04764.jpg" class="story-img">
+                    <div class="story-content">
+                        <h3 class="font-romantic" style="font-size: 2rem;">Ngày đầu tiên</h3>
+                        <span class="story-date">Ngày 23 tháng 04 năm 2016</span>
+                        <p>Lần đầu tiên, khi gặp anh ấy đầu óc tôi nên trống rỗng, bao nhiêu tự tin của tôi đều biến
+                            mất...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="gallery" id="gallery">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Thư Viện Hình Ảnh</h2>
+            <!-- Swiper -->
+            <div class="swiper mySwiper" data-aos="zoom-in">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide"><img src="images/DSC05020.jpg"></div>
+                    <div class="swiper-slide"><img src="images/DSC05054.jpg"></div>
+                    <div class="swiper-slide"><img src="images/DSC05586.jpg"></div>
+                    <div class="swiper-slide"><img src="images/DSC05630.jpg"></div>
+                    <div class="swiper-slide"><img src="images/DSC05745.jpg"></div>
+                    <div class="swiper-slide"><img src="images/DSC05932.jpg"></div>
+                    <div class="swiper-slide"><img src="images/DSC06042.jpg"></div>
+                    <div class="swiper-slide"><img src="images/DSC06147.jpg"></div>
+                    <div class="swiper-slide"><img src="images/DSC04515.jpg"></div>
+                    <div class="swiper-slide"><img src="images/DSC04522.jpg"></div>
+                    <div class="swiper-slide"><img src="images/DSC04764.jpg"></div>
+                </div>
+                <div class="swiper-button-next" style="color: var(--primary-color);"></div>
+                <div class="swiper-button-prev" style="color: var(--primary-color);"></div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="heart-gallery" id="heart-album">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Album Kỷ Niệm</h2>
+            <div class="heart-container" data-aos="zoom-in">
+                <div class="heart-wall">
+                    <div class="heart-item h-r1-c2"><img src="images/DSC04515.jpg"></div>
+                    <div class="heart-item h-r1-c3"><img src="images/DSC04522.jpg"></div>
+                    <div class="heart-item h-r1-c5"><img src="images/DSC04764.jpg"></div>
+                    <div class="heart-item h-r1-c6"><img src="images/DSC05020.jpg"></div>
+
+                    <div class="heart-item h-r2-c1"><img src="images/DSC05054.jpg"></div>
+                    <div class="heart-item h-r2-c2"><img src="images/DSC05586.jpg"></div>
+                    <div class="heart-item h-r2-c3"><img src="images/DSC05630.jpg"></div>
+                    <div class="heart-item h-r2-c4"><img src="images/DSC05745.jpg"></div>
+                    <div class="heart-item h-r2-c5"><img src="images/DSC05932.jpg"></div>
+                    <div class="heart-item h-r2-c6"><img src="images/DSC06042.jpg"></div>
+                    <div class="heart-item h-r2-c7"><img src="images/DSC06147.jpg"></div>
+
+                    <div class="heart-item h-r3-c1"><img src="images/DSC04515.jpg"></div>
+                    <div class="heart-item h-r3-c2"><img src="images/DSC04522.jpg"></div>
+                    <div class="heart-item h-r3-c3"><img src="images/DSC04764.jpg"></div>
+                    <div class="heart-item h-r3-c4"><img src="images/DSC05020.jpg"></div>
+                    <div class="heart-item h-r3-c5"><img src="images/DSC05054.jpg"></div>
+                    <div class="heart-item h-r3-c6"><img src="images/DSC05586.jpg"></div>
+                    <div class="heart-item h-r3-c7"><img src="images/DSC05630.jpg"></div>
+
+                    <div class="heart-item h-r4-c2"><img src="images/DSC05745.jpg"></div>
+                    <div class="heart-item h-r4-c3"><img src="images/DSC05932.jpg"></div>
+                    <div class="heart-item h-r4-c4"><img src="images/DSC06042.jpg"></div>
+                    <div class="heart-item h-r4-c5"><img src="images/DSC06147.jpg"></div>
+                    <div class="heart-item h-r4-c6"><img src="images/DSC04515.jpg"></div>
+
+                    <div class="heart-item h-r5-c3"><img src="images/DSC04522.jpg"></div>
+                    <div class="heart-item h-r5-c4"><img src="images/DSC04764.jpg"></div>
+                    <div class="heart-item h-r5-c5"><img src="images/DSC05020.jpg"></div>
+
+                    <div class="heart-item h-r6-c4"><img src="images/DSC05054.jpg"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="wishes" id="wishes">
+        <div class="container">
+            <h2 class="section-title">Thay Lời Muốn Nói</h2>
+            <div class="wish-container">
+                <div class="wish-form">
+                    <div class="form-group">
+                        <input type="text" placeholder="Tên của bạn *">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" placeholder="Số điện thoại của bạn">
+                    </div>
+                    <div class="form-group">
+                        <textarea rows="5" placeholder="Lời chúc của bạn *"></textarea>
+                    </div>
+                    <button class="btn">Gửi lời chúc</button>
+                </div>
+                <div class="wish-list">
+                    <div style="margin-bottom: 20px;">
+                        <strong>Dương Minh Thảo</strong>
+                        <p style="font-size: 0.8rem; color: #888;">Chúc hai bạn trăm năm hạnh phúc <3< /p>
+                    </div>
+                    <div style="margin-bottom: 20px;">
+                        <strong>Lê Thu Sơn</strong>
+                        <p style="font-size: 0.8rem; color: #888;">Happy Wedding!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="bank-info">
+        <div class="container">
+            <h2 class="section-title">Gửi Quà Tặng</h2>
+            <div class="bank-grid">
+                <div class="bank-card">
+                    <h3>Chú rể</h3>
+                    <p>Thái Trường An</p>
+                    <p>STK: 123456789</p>
+                    <p>Techcombank</p>
+                    <div class="qr-code">QR Code</div>
+                </div>
+                <div class="bank-card">
+                    <h3>Cô dâu</h3>
+                    <p>Phạm Thu Huyền</p>
+                    <p>STK: 987654321</p>
+                    <p>Vietcombank</p>
+                    <div class="qr-code">QR Code</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="events" id="events">
+        <div class="container">
+            <h2 class="section-title">Thời Gian & Địa Điểm</h2>
+            <div class="event-grid">
+                <div class="event-card">
+                    <img src="images/DSC06042.jpg" class="event-img">
+                    <h3 class="font-romantic" style="font-size: 2rem;">Lễ Ăn Hỏi</h3>
+                    <p>09:00 - 20/05/2026</p>
+                    <p>Nhà gái - 461 Nguyễn Khang, Cầu Giấy, Hà Nội</p>
+                    <a href="#" style="color: var(--primary-color); text-decoration: none; font-size: 0.8rem;">Xem vị
+                        trí</a>
+                </div>
+                <div class="event-card">
+                    <img src="images/DSC06147.jpg" class="event-img">
+                    <h3 class="font-romantic" style="font-size: 2rem;">Tiệc Cưới</h3>
+                    <p>18:30 - 23/05/2026</p>
+                    <p>Trung tâm tiệc cưới Trống Đồng Palace</p>
+                    <a href="#" style="color: var(--primary-color); text-decoration: none; font-size: 0.8rem;">Xem vị
+                        trí</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <canvas id="petal-canvas"></canvas>
+
+    <footer>
+        <h2 class="font-romantic" style="font-size: 2.5rem;">Cảm ơn bạn!</h2>
+        <p>Hân hạnh được đón tiếp bạn trong ngày vui của chúng mình.</p>
+        <p style="margin-top: 20px; font-size: 0.7rem; color: #aaa;">Copyright &copy; 2026 Trường An & Thu Huyền</p>
+    </footer>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox">
+        <span class="lightbox-close">&times;</span>
+        <img class="lightbox-content" id="lightbox-img">
+    </div>
+
+    <script>
+        // AOS Initialization
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+
+        // Swiper Initialization
+        var swiper = new Swiper(".mySwiper", {
+            slidesPerView: 1,
+            spaceBetween: 30,
+            loop: true,
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+            autoplay: {
+                delay: 3000,
+                disableOnInteraction: false,
+            },
+            breakpoints: {
+                768: {
+                    slidesPerView: 2,
+                },
+                1024: {
+                    slidesPerView: 3,
+                },
+            },
+        });
+
+        // Falling Petals Effect
+        const canvas = document.getElementById('petal-canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const petals = [];
+        const petalCount = 30;
+
+        class Petal {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height - canvas.height;
+                this.size = Math.random() * 10 + 5;
+                this.speedX = Math.random() * 2 - 1;
+                this.speedY = Math.random() * 1 + 1;
+                this.rotation = Math.random() * 360;
+                this.rotationSpeed = Math.random() * 2 - 1;
+                this.opacity = Math.random() * 0.5 + 0.3;
+            }
+
+            update() {
+                this.y += this.speedY;
+                this.x += this.speedX;
+                this.rotation += this.rotationSpeed;
+                if (this.y > canvas.height) {
+                    this.y = -20;
+                    this.x = Math.random() * canvas.width;
+                }
+            }
+
+            draw() {
+                ctx.save();
+                ctx.translate(this.x, this.y);
+                ctx.rotate(this.rotation * Math.PI / 180);
+                ctx.globalAlpha = this.opacity;
+                ctx.fillStyle = '#ffb7c5'; // Cherry blossom color
+                ctx.beginPath();
+                ctx.ellipse(0, 0, this.size, this.size / 2, 0, 0, 2 * Math.PI);
+                ctx.fill();
+                ctx.restore();
+            }
+        }
+
+        for (let i = 0; i < petalCount; i++) {
+            petals.push(new Petal());
+        }
+
+        function animatePetals() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            petals.forEach(petal => {
+                petal.update();
+                petal.draw();
+            });
+            requestAnimationFrame(animatePetals);
+        }
+        animatePetals();
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        // Countdown Timer
+        const weddingDate = new Date("May 23, 2026 18:30:00").getTime();
+
+        const timer = setInterval(function () {
+            const now = new Date().getTime();
+            const distance = weddingDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("days").innerHTML = days.toString().padStart(2, '0');
+            document.getElementById("hours").innerHTML = hours.toString().padStart(2, '0');
+            document.getElementById("minutes").innerHTML = minutes.toString().padStart(2, '0');
+            document.getElementById("seconds").innerHTML = seconds.toString().padStart(2, '0');
+
+            if (distance < 0) {
+                clearInterval(timer);
+                document.getElementById("countdown").innerHTML = "ĐÃ DIỄN RA";
+            }
+        }, 1000);
+
+        // Smooth Scroll
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                document.querySelector(targetId).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Lightbox Logic
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxClose = document.querySelector('.lightbox-close');
+
+        // Click on any image to open lightbox (except QR codes if they are not real images or you want to exclude them)
+        document.querySelectorAll('img:not(.no-lightbox)').forEach(image => {
+            image.onclick = (e) => {
+                e.stopPropagation();
+                lightbox.style.display = 'flex';
+                lightboxImg.src = image.src;
+                document.body.style.overflow = 'hidden'; // Prevent scrolling
+            };
+        });
+
+        // Close lightbox
+        const closeLightbox = () => {
+            lightbox.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        };
+
+        lightboxClose.onclick = closeLightbox;
+        lightbox.onclick = closeLightbox;
+    </script>
+</body>
+
+</html>
